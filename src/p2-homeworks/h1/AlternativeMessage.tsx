@@ -1,9 +1,18 @@
 import React from "react";
 
-function AlternativeMessage() {
+type WordsType = Array<string>;
+
+type PropsType = {
+    words: Array<WordsType>
+}
+
+function AlternativeMessage(props: PropsType) {
+    console.log(props.words);
     return (
         <div>
-
+            {props.words.map((word, i) => {
+                return (<span key={i}>{word}{" "}</span>)
+            })}
         </div>
     );
 }
