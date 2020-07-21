@@ -7,7 +7,6 @@ type PropsType = {
 }
 
 function AlternativeMessage(props: PropsType) {
-    console.log(props.words);
     return (
         <div>
             {props.words.map((word, i) => {
