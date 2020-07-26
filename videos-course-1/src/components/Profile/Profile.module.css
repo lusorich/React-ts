@@ -1,0 +1,12 @@
+.content {
+  grid-area: c;
+  background-color: hotpink;
+}
+
+.content img {
+  width: 100%;
+}
+
+.item {
+    color: #000000;
+}

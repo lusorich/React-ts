@@ -4,27 +4,5 @@
   width: 1200px;
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
-  grid-template-areas: "h h""n c";
-}
-
-.header {
-  grid-area: h;
-  background-color: red;
-}
-.header img {
-  width: 60px;
-}
-
-.nav {
-  grid-area: n;
-  background-color: green;
-}
-
-.content {
-  grid-area: c;
-  background-color: hotpink;
-}
-
-.content img {
-  width: 100%;
+  grid-template-areas: "h h" "n c";
 }
