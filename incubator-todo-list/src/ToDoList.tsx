@@ -11,7 +11,7 @@ type PropsType = {
     tasks: Array<TaskType>
 }
 
-export function ToDoList(props: PropsType) {
+export const ToDoList: React.FC<PropsType> = (props) => {
     return (
         <div className="App">
             <div>
