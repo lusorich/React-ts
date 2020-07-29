@@ -32,6 +32,9 @@ export const optionsArray: Array<Option> = [
 ]
 
 export function fuzzBuzz(num: number, optionsArray: Array<Option>, result: string = '', iter: number = 0): string {
+    if (!isFinite(num)) {
+        throw new Error('Not good num')
+    }
     if (iter === optionsArray.length) {
         return result;
     }
@@ -150,8 +153,23 @@ export const journal: JournalI = {
 ///////////////////////////////////////////////////////////
 
 //3. Функция должна вернуть [{task}, {task}] у которых поле isDone = true
-export function getDoneTask(journal: JournalI) { }
+export function getDoneTask(journal: JournalI): Array<TaskI> {
+    const tasks: Array<TaskI> = journal.todoLists[0].tasksList;
+
+    return tasks.filter((elem) => {
+        return elem.isDone === true;
+    })
+}
 
 //4. Функция должна поменять поле isDone в текущей таске по её id мутируя исходный обьект;
-export function changeTaskStatusById(journal: JournalI, todoId: string, taskId: string) { }
+export function changeTaskStatusById(journal: JournalI, todoId: string, taskId: string) {
+    if (todoId === journal.id) {
+        journal.todoLists[0].tasksList.forEach((item) => {
+            if (item.id === taskId) {
+                item.isDone = !item.isDone;
+            }
+        })
+    }
+    return journal;
+}
 // * повторный вызов getDoneTask должен вернуть другой результат
