@@ -27,7 +27,7 @@ const filterAffairs = (affairs: Array<AffairType>, filter: FilterType): Array<Af
     })
     return newAffairs;
 }
-const deleteAffair = (affairs: Array<AffairType>, _id: number): any => { // need to fix any
+const deleteAffair = (affairs: Array<AffairType>, _id: number): Array<AffairType> => { // need to fix any
     return affairs.filter(elem => {
         return elem._id !== _id
     }) // need to fix
