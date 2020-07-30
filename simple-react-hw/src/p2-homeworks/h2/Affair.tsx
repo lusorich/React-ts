@@ -1,5 +1,7 @@
 import React from "react";
-import {AffairType} from "./HW2";
+import { AffairType } from "./HW2";
+import s from "./Affairs.module.css";
+
 
 type AffairPropsType = {
     // key не нужно типизировать
@@ -8,12 +10,17 @@ type AffairPropsType = {
 }
 
 function Affair(props: AffairPropsType) {
-    const deleteCallback = () => {props.deleteAffairCallback(props.affair._id)};// need to fix
+    const deleteCallback = () => { props.deleteAffairCallback(props.affair._id) };// need to fix
 
     return (
-        <div>
-            <span>{props.affair.name}</span>
-            <button onClick={deleteCallback}>X</button>
+        <div className={s.task}>
+            <span className={props.affair.priority === "high" ? `${s.task__title} ${s.task__title_high}` :
+                props.affair.priority === "middle" ? `${s.task__title} ${s.task__title_middle}` :
+                    props.affair.priority === "low" ? `${s.task__title} ${s.task__title_low}` :
+                        `${s.task__title}`}>
+                {props.affair.name}
+            </span>
+            <button className={s.task__btn} onClick={deleteCallback}>X</button>
         </div>
     );
 }

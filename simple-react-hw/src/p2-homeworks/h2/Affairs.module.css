@@ -1,3 +1,45 @@
-.someClass {
+.task__title {
+    font-size: 16px;
+    min-width: 100px;
+}
 
+.task__title_high {
+    color: #ff0808;
+}
+
+.task__title_middle {
+    color: #7c4949;
+}
+
+.task__title_low {
+    color: #d6a9a9;
+}
+
+.task {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.task__btn {
+    border: 2px solid black;
+    background-color: unset;
+    font-size: 20px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 130px;
+}
+
+.filter__btn {
+    border: 1px solid black;
+    background-color: aliceblue;
+    font-size: 16px;
+}
+
+.btns {
+    display: flex;
+    min-width: 183px;
 }
