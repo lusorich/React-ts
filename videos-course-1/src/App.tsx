@@ -18,7 +18,7 @@ const App = () => {
           <Route path='/profile' component={Profile} />
         </div>
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
   )
 }
 

@@ -3,6 +3,10 @@
   background-color: green;
 }
 
-.item {
-    color: #ffffff;
+.nav__wrapper  a{
+  color: #fff 
+  }
+
+  .nav__wrapper a.activeLink {
+  color: #000
 }
