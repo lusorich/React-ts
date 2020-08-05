@@ -1,8 +1,18 @@
-.header {
-  grid-area: h;
-  background-color: red;
+.dialog__person {
+  width: 10%;
 }
 
-.header img {
-  width: 60px;
+.dialog__message {
+  width: 90%;
+  margin: 0;
+}
+
+.dialogList {
+
+}
+
+.dialogItem {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
 }
