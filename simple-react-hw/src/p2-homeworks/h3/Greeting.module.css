@@ -1,11 +1,50 @@
-.someClass {
-
+.wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .error {
-    border: 1px solid red;
+  margin-right: 20px;
+  border: 1px solid red;
 }
 
 .success {
-    border: 1px solid orange;
+  border: 1px solid #cdc2e2;
+  margin-right: 20px;
+}
+
+.btn {
+  background-color: #cdc2e2;
+  border: none;
+  font-family: cursive;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.count {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  line-height: 25px;
+  position: relative;
+}
+
+.count::before {
+  content: "Users Count";
+  font-size: 12px;
+  position: absolute;
+  bottom: 21px;
+  left: 35px;
+  min-width: 70px;
+  text-transform: lowercase;
+}
+
+.count::after {
+  content: "";
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIDAgNTEyIDUxMSIgd2lkdGg9IjUxMnB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0xNDMuODcxMDk0IDUxMi40ODQzNzVjLTEwLjM5ODQzOCAwLTIwLjU5NzY1Ni00LjA2MjUtMjguMjgxMjUtMTEuNzM0Mzc1bC05Ny45NjA5MzgtOTcuNzUzOTA2Yy0xMS4zNjcxODctMTEuMzQzNzUtMTcuNjI4OTA2LTI2LjQzMzU5NC0xNy42Mjg5MDYtNDIuNDkyMTg4czYuMjYxNzE5LTMxLjE1MjM0NCAxNy42Mjg5MDYtNDIuNDk2MDk0bDk3Ljk2MDkzOC05Ny43NTM5MDZjMTEuNTExNzE4LTExLjQ5MjE4NyAyOC42NjQwNjItMTQuODg2NzE4IDQzLjY5NTMxMi04LjY1MjM0NCAxNS4wMTE3MTkgNi4yMjY1NjMgMjQuNzEwOTM4IDIwLjc0MjE4OCAyNC43MTA5MzggMzYuOTc2NTYzdjkxLjkyMTg3NWMxNTguODA0Njg3IDAgMjg4LjAwMzkwNi0xMjkuMTk5MjE5IDI4OC4wMDM5MDYtMjg4LjAwMzkwNnYtMzEuOTk2MDk0YzAtMTEuMDQ2ODc1IDguOTUzMTI1LTIwIDIwLTIwczIwIDguOTUzMTI1IDIwIDIwdjMxLjk5NjA5NGMwIDg3LjYxMzI4MS0zNC4xMTcxODggMTY5Ljk4NDM3NS05Ni4wNzAzMTIgMjMxLjkzNzUtNjEuOTUzMTI2IDYxLjk0OTIxOC0xNDQuMzIwMzEzIDk2LjA3MDMxMi0yMzEuOTMzNTk0IDk2LjA3MDMxMi0yMi4wNTg1OTQgMC00MC4wMDM5MDYtMTcuOTQ1MzEyLTQwLjAwMzkwNi00MHYtOTEuOTI1NzgxYzAtLjAwMzkwNiAwLS4wMDc4MTMgMC0uMDExNzE5LS4wMzEyNS0uMDE1NjI1LS4wNzAzMTMtLjAzMTI1LS4xMDU0NjktLjA0Mjk2OC0uMDExNzE5LjAxNTYyNC0uMDI3MzQ0LjAyNzM0My0uMDQyOTY5LjA0Mjk2OGwtOTcuOTYwOTM4IDk3Ljc1NzgxM2MtMy43OTI5NjggMy43ODUxNTYtNS44ODI4MTIgOC44MjAzMTItNS44ODI4MTIgMTQuMTc5Njg3czIuMDg5ODQ0IDEwLjM5NDUzMiA1Ljg4MjgxMiAxNC4xNzk2ODhsOTcuOTYwOTM4IDk3Ljc1MzkwNi4wNDI5NjkuMDQyOTY5Yy4wMzUxNTYtLjAxMTcxOS4wNzQyMTktLjAyMzQzOC4xMDU0NjktLjAzOTA2MyAwLS4wMDM5MDYgMC0uMDA3ODEyIDAtLjAxNTYyNXYtMjEuOTIxODc1YzAtMTEuMDQ2ODc1IDguOTU3MDMxLTIwIDIwLjAwMzkwNi0yMCAxMS4wNDI5NjggMCAyMCA4Ljk1MzEyNSAyMCAyMHYyMS45MjE4NzVjMCAxNi4yMzQzNzUtOS42OTkyMTkgMzAuNzUtMjQuNzEwOTM4IDM2Ljk3NjU2My00Ljk5NjA5NCAyLjA3NDIxOC0xMC4yMzA0NjggMy4wODIwMzEtMTUuNDE0MDYyIDMuMDgyMDMxem0wIDAiLz48L3N2Zz4=);
+  width: 27px;
+  height: 31px;
+  position: absolute;
+  bottom: 9px;
+  left: 21px;
+  background-size: cover;
 }
