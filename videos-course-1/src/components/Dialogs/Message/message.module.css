@@ -1,0 +1,18 @@
+.dialog__person {
+  width: 10%;
+}
+
+.dialog__message {
+  width: 90%;
+  margin: 0;
+}
+
+.dialogList {
+
+}
+
+.dialogItem {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}

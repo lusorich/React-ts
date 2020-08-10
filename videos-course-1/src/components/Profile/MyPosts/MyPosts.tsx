@@ -11,9 +11,11 @@ type postType = {
 const MyPosts = () => {
 
     let postData: Array<postType> = [
-        {id: 1, message: 'Hi, how are you?', likesCount: 10},
-        {id: 2, message: 'First', likesCount: 12}
+        { id: 1, message: 'Hi, how are you?', likesCount: 10 },
+        { id: 2, message: 'First', likesCount: 12 }
     ]
+
+    let postsArray: any = postData.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
 
     return (
         <div>
@@ -22,8 +24,7 @@ const MyPosts = () => {
                 <button>Add post</button>
             </div>
             <div className={s.posts}>
-                <Post message={'Hi, how are you?'}/>
-                <Post message='First post'/>
+                {postsArray}
             </div>
         </div>
     )

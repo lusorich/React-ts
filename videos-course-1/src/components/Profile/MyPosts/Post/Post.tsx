@@ -5,6 +5,7 @@ type MessageType = string;
 
 type PropsType = {
     message: MessageType
+    likesCount: number
 }
 
 const Post = (props: PropsType) => {
