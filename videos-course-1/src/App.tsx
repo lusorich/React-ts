@@ -6,12 +6,10 @@ import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { postType, dialogPersonType, messageDataType } from './redux/state';
+import { stateRootType } from './redux/state';
 
 type propsType = {
-  posts: Array<postType>
-  dialogs: Array<dialogPersonType>
-  messages: Array<messageDataType>
+  state: stateRootType
 }
 
 const App = (props: propsType) => {
@@ -21,8 +19,8 @@ const App = (props: propsType) => {
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route exact path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
-          <Route path='/profile' render={() => <Profile posts={props.posts} />} />
+          <Route exact path='/dialogs' render={() => <Dialogs state={props.state.messagePage} />} />
+          <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
         </div>
       </div>
     </BrowserRouter>
