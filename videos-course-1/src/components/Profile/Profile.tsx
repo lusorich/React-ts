@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Profile.module.css';
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo';
-import { postType } from '../..';
+import { postType } from '../../redux/state';
 
 type propsType = {
     posts: Array<postType>

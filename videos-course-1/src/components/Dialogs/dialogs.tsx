@@ -2,10 +2,9 @@ import React from 'react';
 import s from './dialogs.module.css';
 import Message from './Message';
 import DialogItem from './dialogItem';
-import { postType, dialogPersonType, messageDataType } from '../..';
+import { dialogPersonType, messageDataType } from '../../redux/state';
 
 type propsType = {
-    posts: Array<postType>
     dialogs: Array<dialogPersonType>
     messages: Array<messageDataType>
 }

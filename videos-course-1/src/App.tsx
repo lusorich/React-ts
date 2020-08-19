@@ -6,7 +6,7 @@ import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { postType, dialogPersonType, messageDataType } from '.';
+import { postType, dialogPersonType, messageDataType } from './redux/state';
 
 type propsType = {
   posts: Array<postType>
@@ -21,7 +21,7 @@ const App = (props: propsType) => {
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route exact path='/dialogs' render={() => <Dialogs posts={props.posts} dialogs={props.dialogs} messages={props.messages} />} />
+          <Route exact path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
           <Route path='/profile' render={() => <Profile posts={props.posts} />} />
         </div>
       </div>
