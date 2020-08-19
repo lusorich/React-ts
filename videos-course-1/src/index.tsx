@@ -40,7 +40,7 @@ let postData: Array<postType> = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <App posts={postData} />
+    <App posts={postData} dialogs={dialogsData} messages={messagesData} />
   </React.StrictMode>,
   document.getElementById('root')
 );
