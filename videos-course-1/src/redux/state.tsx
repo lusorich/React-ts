@@ -15,26 +15,34 @@ export type postType = {
 }
 
 type stateRootType = {
-    messages: Array<messageDataType>,
-    dialogs: Array<dialogPersonType>,
-    posts: Array<postType>
+    profilePage: {
+        messages: Array<messageDataType>
+    },
+    messagePage: {
+        posts: Array<postType>,
+        dialogs: Array<dialogPersonType>
+    }
 }
 
 export let state: stateRootType = {
-    messages: [
-        { id: 1, message: 'Hello' },
-        { id: 2, message: 'Hi' },
-        { id: 3, message: 'Konichiwa' },
-        { id: 4, message: 'Guten Tag' },
-    ],
-    dialogs: [
-        { id: 1, name: 'Mark' },
-        { id: 2, name: 'Tony' },
-        { id: 3, name: 'Zuk' },
-        { id: 4, name: 'Dick' }
-    ],
-    posts: [
-        { id: 1, message: 'Hi, how are you?', likesCount: 10 },
-        { id: 2, message: 'First', likesCount: 12 }
-    ]
+    profilePage: {
+        messages: [
+            { id: 1, message: 'Hello' },
+            { id: 2, message: 'Hi' },
+            { id: 3, message: 'Konichiwa' },
+            { id: 4, message: 'Guten Tag' },
+        ]
+    },
+    messagePage: {
+        posts: [
+            { id: 1, message: 'Hi, how are you?', likesCount: 10 },
+            { id: 2, message: 'First', likesCount: 12 }
+        ],
+        dialogs: [
+            { id: 1, name: 'Mark' },
+            { id: 2, name: 'Tony' },
+            { id: 3, name: 'Zuk' },
+            { id: 4, name: 'Dick' }
+        ]
+    }
 }
