@@ -1,10 +1,15 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/';
+import { postType } from '../../..';
 
-const MyPosts = () => {
+type propsType = {
+    posts: Array<postType>
+}
 
-    let postsArray: any = postData.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
+const MyPosts = (props: propsType) => {
+
+    let postsArray: any = props.posts.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
 
     return (
         <div>

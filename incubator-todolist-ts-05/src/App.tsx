@@ -24,7 +24,7 @@ function App() {
 
     let [todoLists, setTodoLists] = useState<Array<TodoListType>>([
         { id: v1(), title: "What to Learn", filter: "all" },
-        { id: v1(), title: "What to buy", filter: "all" }
+        { id: v1(), title: "What to buy", filter: "active" }
     ])
 
 
@@ -49,17 +49,26 @@ function App() {
     }
 
 
-    let tasksForTodolist = tasks;
+    // let tasksForTodolist = tasks;
 
-    if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => t.isDone === false);
-    }
-    if (filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.isDone === true);
-    }
+    // if (filter === "active") {
+    //     tasksForTodolist = tasks.filter(t => t.isDone === false);
+    // }
+    // if (filter === "completed") {
+    //     tasksForTodolist = tasks.filter(t => t.isDone === true);
+    // }
 
-    function changeFilter(value: FilterValuesType) {
-        setFilter(value);
+    // function changeFilter(value: FilterValuesType) {
+    //     setFilter(value);
+    // }
+
+    function changeFilter(value: FilterValuesType, todoListID: string) {
+        let todoList = todoLists.find(tl => tl.id === todoListID);
+
+        if (todoList) {
+            todoList.filter = value;
+            setTodoLists([...todoLists]);
+        }
     }
 
 
@@ -67,6 +76,14 @@ function App() {
         <div className="App">
             {
                 todoLists.map((todoItem) => {
+                    let tasksForTodolist = tasks;
+
+                    if (todoItem.filter === "active") {
+                        tasksForTodolist = tasks.filter(t => t.isDone === false);
+                    }
+                    if (todoItem.filter === "completed") {
+                        tasksForTodolist = tasks.filter(t => t.isDone === true);
+                    }
                     return (
                         <Todolist
                             key={todoItem.id}

@@ -6,8 +6,13 @@ import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { postType } from '.';
 
-const App = () => {
+type propsType = {
+  posts: Array<postType>
+}
+
+const App = (props: propsType) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -15,7 +20,7 @@ const App = () => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <Dialogs />} />
-          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/profile' render={() => <Profile posts={props.posts} />} />
         </div>
       </div>
     </BrowserRouter>

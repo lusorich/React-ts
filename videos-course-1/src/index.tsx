@@ -3,23 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-type propsType = {
-  name?: string,
-  id?: number,
-  message?: string
-}
-
-type dialogPersonType = {
+export type dialogPersonType = {
   id: number,
   name: string
 }
 
-type messageDataType = {
+export type messageDataType = {
   id: number,
   message: string
 }
 
-type postType = {
+export type postType = {
   id: number,
   message: string,
   likesCount: number
@@ -46,7 +40,7 @@ let postData: Array<postType> = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App posts={postData} />
   </React.StrictMode>,
   document.getElementById('root')
 );
