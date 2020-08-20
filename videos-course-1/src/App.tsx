@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/';
-import Navbar from './components/Navbar/';
+import Sidebar from './components/Sidebar';
 import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
@@ -17,7 +17,7 @@ const App = (props: propsType) => {
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar />
+        <Sidebar />
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <Dialogs state={props.state.messagePage} />} />
           <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
