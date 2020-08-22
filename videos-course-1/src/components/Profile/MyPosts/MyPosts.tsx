@@ -10,12 +10,19 @@ type propsType = {
 const MyPosts = (props: propsType) => {
 
     let postsArray: any = props.posts.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
+    const textAreaRef = React.createRef<HTMLTextAreaElement>();
+
+    const onAddPost = () => {
+        if (textAreaRef.current) {
+            alert(textAreaRef.current && textAreaRef.current.value);
+        }
+    }
 
     return (
         <div>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <textarea ref={textAreaRef}></textarea>
+                <button onClick={onAddPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postsArray}
