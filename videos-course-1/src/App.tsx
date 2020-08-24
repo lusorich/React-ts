@@ -6,10 +6,11 @@ import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { stateRootType } from './redux/state';
+import { stateRootType} from './redux/state';
 
 type propsType = {
-  state: stateRootType
+  state: stateRootType,
+  addPost: (newPost: string) => void
 }
 
 const App = (props: propsType) => {
@@ -20,7 +21,7 @@ const App = (props: propsType) => {
         <Sidebar state={props.state.sidebar}/>
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <Dialogs state={props.state.messagePage} />} />
-          <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
+          <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={props.addPost}/>} />
         </div>
       </div>
     </BrowserRouter>

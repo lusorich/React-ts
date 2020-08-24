@@ -4,7 +4,8 @@ import Post from './Post/';
 import { postType } from '../../../redux/state';
 
 type propsType = {
-    posts: Array<postType>
+    posts: Array<postType>,
+    addPost: (newPost: string) => void
 }
 
 const MyPosts = (props: propsType) => {
@@ -14,7 +15,7 @@ const MyPosts = (props: propsType) => {
 
     const onAddPost = () => {
         if (textAreaRef.current) {
-            alert(textAreaRef.current && textAreaRef.current.value);
+            props.addPost(textAreaRef.current.value);
         }
     }
 
