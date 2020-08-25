@@ -16,6 +16,7 @@ const MyPosts = (props: propsType) => {
     const onAddPost = () => {
         if (textAreaRef.current) {
             props.addPost(textAreaRef.current.value);
+            textAreaRef.current.value = "";
         }
     }
 
