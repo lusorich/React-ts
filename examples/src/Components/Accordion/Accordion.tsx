@@ -3,26 +3,22 @@ import React, { useState } from 'react';
 export const Accordion: React.FC = () => {
     let [collapsed, setCollapsed] = useState(false);
 
-    const onToggle = () => {
-        setCollapsed(!collapsed);
-    }
-
     return (
         <div>
-            <AccordionTitle title='hello' />
-            <button onClick={onToggle}>Toggle</button>
+            <AccordionTitle title='menu' onClick={() => {setCollapsed(!collapsed)}}/>
             {collapsed && <AccordionBody />}
         </div>
     )
 }
 
 type AccordionTitlePropsType = {
-    title: string
+    title: string,
+    onClick: () => void
 }
 
 function AccordionTitle(props: AccordionTitlePropsType) {
     return (
-        <h3>{props.title}</h3>
+        <h3 onClick={() => props.onClick()}>{props.title}</h3>
     )
 }
 
