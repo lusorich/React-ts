@@ -10,7 +10,8 @@ import { stateRootType} from './redux/state';
 
 type propsType = {
   state: stateRootType,
-  addPost: (newPost: string) => void
+  addPost: () => void,
+  updateNewPostText: (newText: string) => void
 }
 
 const App = (props: propsType) => {
@@ -21,7 +22,7 @@ const App = (props: propsType) => {
         <Sidebar state={props.state.sidebar}/>
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <Dialogs state={props.state.messagePage} />} />
-          <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={props.addPost}/>} />
+          <Route path='/profile' render={() => <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
         </div>
       </div>
     </BrowserRouter>

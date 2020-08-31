@@ -17,10 +17,11 @@ export const сOnOff = (props: propsType) => {
     const indStyle = {
         color: props.ind ? "red" : "black"
     }
+    console.log(props.ind)
     return (
         <>
-            <button style={onStyle} onClick={() => props.onClick}>On</button>
-            <button style={offStyle} onClick={() => props.onClick}>Off</button>
+            <button style={onStyle} onClick={props.onClick}>On</button>
+            <button style={offStyle} onClick={props.onClick}>Off</button>
             <span style={indStyle}>O</span>
         </>
     );

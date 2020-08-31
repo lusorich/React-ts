@@ -1,4 +1,7 @@
-import { rerenderEntireTree } from "../render"
+
+let rerenderEntireTree = (state: stateRootType) => {
+
+}
 
 export type dialogPersonType = {
     id: number,
@@ -24,6 +27,7 @@ export type friendType = {
 export type stateRootType = {
     profilePage: {
         posts: Array<postType>,
+        newPostText: string
     },
     messagePage: {
         messages: Array<messageDataType>,
@@ -39,7 +43,8 @@ export let state: stateRootType = {
         posts: [
             { id: 1, message: 'Hi, how are you?', likesCount: 10 },
             { id: 2, message: 'First', likesCount: 12 }
-        ]
+        ],
+        newPostText: ''
     },
     messagePage: {
         messages: [
@@ -64,12 +69,22 @@ export let state: stateRootType = {
     }
 }
 
-export let addPost = (postMessage: string) => {
+export let addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
+    updateNewPostText('');
     rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer;
 }
