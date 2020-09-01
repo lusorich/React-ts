@@ -40,6 +40,7 @@ export type stateRootType = {
 
 export type storeType = {
     _state: stateRootType,
+    getState: () => stateRootType,
     addPost: () => void,
     updateNewPostText: (newText: string) => void,
     subscribe: (observer: any) => void
@@ -97,7 +98,7 @@ export type storeType = {
 // }
 
 
-const store: storeType = {
+export const store: storeType = {
     _state: {
         profilePage: {
             posts: [
@@ -128,6 +129,9 @@ const store: storeType = {
             ]
         }
     },
+    getState() {
+        return this._state;
+    },
     addPost() {
         let newPost = {
             id: 5,
@@ -139,8 +143,9 @@ const store: storeType = {
         rerenderEntireTree(this._state);
     },
     updateNewPostText(newText: string) {
+        debugger;
         this._state.profilePage.newPostText = newText;
-        rerenderEntireTree(this._state);
+        rerenderEntireTree(this.getState());
     },
     subscribe(observer: any) {
         rerenderEntireTree = observer;
