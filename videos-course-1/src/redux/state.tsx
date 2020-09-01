@@ -1,8 +1,3 @@
-
-let rerenderEntireTree = (state: stateRootType) => {
-
-}
-
 export type dialogPersonType = {
     id: number,
     name: string
@@ -39,6 +34,7 @@ export type stateRootType = {
 }
 
 export type storeType = {
+    _callSubscriber: (state: stateRootType) => void,
     _state: stateRootType,
     getState: () => stateRootType,
     addPost: () => void,
@@ -99,6 +95,9 @@ export type storeType = {
 
 
 export const store: storeType = {
+    _callSubscriber(state){
+
+    },
     _state: {
         profilePage: {
             posts: [
@@ -140,14 +139,13 @@ export const store: storeType = {
         };
         this._state.profilePage.posts.push(newPost);
         this.updateNewPostText('');
-        rerenderEntireTree(this._state);
+        this._callSubscriber(this._state);
     },
     updateNewPostText(newText: string) {
-        debugger;
         this._state.profilePage.newPostText = newText;
-        rerenderEntireTree(this.getState());
+        this._callSubscriber(this._state);
     },
     subscribe(observer: any) {
-        rerenderEntireTree = observer;
+        this._callSubscriber = observer;
     }
 }
