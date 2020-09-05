@@ -60,7 +60,7 @@ function HW3() {
             }
         })
         console.log(newPurchases);
-        setPurchases(newPurchases);
+        setPurchases([...newPurchases]);
     }
 
     return (

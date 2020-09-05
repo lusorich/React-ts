@@ -1,7 +1,13 @@
 .default {
-
+    font-size: 16px;
+    font-family: monospace;
+    background: #dfdfff;
+    border: 1px dotted black;
 }
 
 .red {
+    font-size: 20px;
+    font-family: monospace;
     background: red;
+    border: 2px dotted #f5d7de;
 }
