@@ -28,6 +28,10 @@
   position: relative;
 }
 
+.countNumber {
+  margin: 0 5px 0;
+}
+
 .count::before {
   content: "Users Count";
   font-size: 12px;

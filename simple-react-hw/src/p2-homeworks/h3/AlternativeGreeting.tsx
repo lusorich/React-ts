@@ -1,6 +1,7 @@
 import React from "react";
 import { PurchasesType } from "./HW3";
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton';
+import s from './Greeting.module.css';
 
 type AlternativeGreetingProps = {
     purchases: Array<PurchasesType>
@@ -23,7 +24,7 @@ const AlternativeGreeting: React.FC<AlternativeGreetingProps> = ({purchases, plu
                         return (
                             <li key={elem._id}>
                                 <span>{elem.name}</span>
-                                <span>{elem.count}</span>
+                                <span className={s.countNumber}>{elem.count}</span>
                                 <SuperButton onClick={onAddCountCB}>+</SuperButton>
                             </li>)
                     })
