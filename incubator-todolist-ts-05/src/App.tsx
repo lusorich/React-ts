@@ -56,6 +56,15 @@ function App() {
         }
     }
 
+    function changeTaskTitle(taskId: string, title: string, todoListId: string) {
+        let todoListTasks = tasks[todoListId];
+        let task = todoListTasks.find(t => t.id === taskId);
+        if (task) {
+            task.title = title;
+            setTasks({ ...tasks });
+        }
+    }
+
     function changeFilter(value: FilterValuesType, todoListID: string) {
         let todoList = todoLists.find(tl => tl.id === todoListID);
 
@@ -86,6 +95,16 @@ function App() {
         });
     }
 
+    function changeTodoListTitle(title: string, todoListID: string) {
+        let todoList = todoLists.find(tl => tl.id === todoListID);
+
+        if (todoList) {
+            todoList.title = title;
+            setTodoLists([...todoLists]);
+        }
+
+    }
+
     return (
         <div className="App">
             <AddItemForm addItem={addTodoList} />
@@ -112,6 +131,8 @@ function App() {
                             changeTaskStatus={changeStatus}
                             filter={todoItem.filter}
                             removeTodoList={removeTodoList}
+                            changeTaskTitle={changeTaskTitle}
+                            changeTodoListTitle={changeTodoListTitle}
                         />
                     )
                 })
