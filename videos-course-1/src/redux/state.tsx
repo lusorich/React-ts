@@ -33,13 +33,24 @@ export type stateRootType = {
     }
 }
 
+export type addPostActionType = {
+    type: 'ADD-POST'
+}
+
+
+export type changeNewTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+
+
+export type actionsType = addPostActionType | changeNewTextActionType;
 export type storeType = {
     _callSubscriber: (state: stateRootType) => void,
     _state: stateRootType,
     getState: () => stateRootType,
-    addPost: () => void,
-    updateNewPostText: (newText: string) => void,
-    subscribe: (observer: any) => void
+    subscribe: (observer: any) => void,
+    dispatch: (action: actionsType) => void
 }
 
 // export let state: stateRootType = {
@@ -94,9 +105,11 @@ export type storeType = {
 // }
 
 
-export const store: storeType = {
-    _callSubscriber(state){
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+export const store: storeType = {
+    _callSubscriber() {
     },
     _state: {
         profilePage: {
@@ -131,21 +144,38 @@ export const store: storeType = {
     getState() {
         return this._state;
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this.updateNewPostText('');
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+    // addPost() {
+    //     let newPost = {
+    //         id: 5,
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0
+    //     };
+    //     this._state.profilePage.posts.push(newPost);
+    //     this.updateNewPostText('');
+    //     this._callSubscriber(this._state);
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state.profilePage.newPostText = newText;
+    //     this._callSubscriber(this._state);
+    // },
     subscribe(observer: any) {
         this._callSubscriber = observer;
+    },
+    dispatch(action) {
+        switch (action.type) {
+            case ADD_POST:
+                let newPost = {
+                    id: 5,
+                    message: this._state.profilePage.newPostText,
+                    likesCount: 0
+                };
+                this._state.profilePage.posts.push(newPost);
+                this._state.profilePage.newPostText = '';
+                this._callSubscriber(this._state);
+                break;
+            case UPDATE_NEW_POST_TEXT:
+                this._state.profilePage.newPostText = action.newText;
+                this._callSubscriber(this._state);
+        }
     }
 }
