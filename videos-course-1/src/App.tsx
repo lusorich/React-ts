@@ -20,7 +20,7 @@ const App = (props: propsType) => {
         <Header />
         <Sidebar state={props.state.sidebar} />
         <div className='app-wrapper-content'>
-          <Route exact path='/dialogs' render={() => <Dialogs state={props.state.messagePage} />} />
+          <Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch} />} />
           <Route path='/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch} />} />
         </div>
       </div>

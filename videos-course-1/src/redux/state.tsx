@@ -24,9 +24,10 @@ export type stateRootType = {
         posts: Array<postType>,
         newPostText: string
     },
-    messagePage: {
+    dialogsPage: {
         messages: Array<messageDataType>,
-        dialogs: Array<dialogPersonType>
+        dialogs: Array<dialogPersonType>,
+        newMessageBody: string
     },
     sidebar: {
         friends: Array<friendType>
@@ -43,8 +44,18 @@ export type changeNewTextActionType = {
     newText: string
 }
 
+export type changeNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-BODY',
+    newMessageBody: string
+}
 
-export type actionsType = addPostActionType | changeNewTextActionType;
+export type sendMessageType = {
+    type: 'SEND-MESSAGE'
+}
+
+
+export type actionsType = addPostActionType | changeNewTextActionType | changeNewMessageTextActionType
+    | sendMessageType;
 export type storeType = {
     _callSubscriber: (state: stateRootType) => void,
     _state: stateRootType,
@@ -53,60 +64,20 @@ export type storeType = {
     dispatch: (action: actionsType) => void
 }
 
-// export let state: stateRootType = {
-//     profilePage: {
-//         posts: [
-//             { id: 1, message: 'Hi, how are you?', likesCount: 10 },
-//             { id: 2, message: 'First', likesCount: 12 }
-//         ],
-//         newPostText: ''
-//     },
-//     messagePage: {
-//         messages: [
-//             { id: 1, message: 'Hello' },
-//             { id: 2, message: 'Hi' },
-//             { id: 3, message: 'Konichiwa' },
-//             { id: 4, message: 'Guten Tag' },
-//         ],
-//         dialogs: [
-//             { id: 1, name: 'Mark' },
-//             { id: 2, name: 'Tony' },
-//             { id: 3, name: 'Zuk' },
-//             { id: 4, name: 'Dick' }
-//         ]
-//     },
-//     sidebar: {
-//         friends: [
-//             { id: 1, name: "Tony" },
-//             { id: 2, name: "Molly" },
-//             { id: 3, name: "Sanny" }
-//         ]
-//     }
-// }
-
-// export let addPost = () => {
-//     let newPost = {
-//         id: 5,
-//         message: state.profilePage.newPostText,
-//         likesCount: 0
-//     };
-//     state.profilePage.posts.push(newPost);
-//     updateNewPostText('');
-//     rerenderEntireTree(state);
-// }
-
-// export let updateNewPostText = (newText: string) => {
-//     state.profilePage.newPostText = newText;
-//     rerenderEntireTree(state);
-// }
-
-// export const subscribe = (observer: any) => {
-//     rerenderEntireTree = observer;
-// }
-
-
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
+export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
+export const updateNewTextActionCreator = (text: string): changeNewTextActionType => ({
+    type: UPDATE_NEW_POST_TEXT, newText: text
+})
+export const updateNewMessageBodyCreator = (text: string): changeNewMessageTextActionType => ({
+    type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: text
+})
+
+export const sendMessageCreator = (): sendMessageType => ({type: SEND_MESSAGE})
 
 export const store: storeType = {
     _callSubscriber() {
@@ -119,7 +90,7 @@ export const store: storeType = {
             ],
             newPostText: ''
         },
-        messagePage: {
+        dialogsPage: {
             messages: [
                 { id: 1, message: 'Hello' },
                 { id: 2, message: 'Hi' },
@@ -131,7 +102,8 @@ export const store: storeType = {
                 { id: 2, name: 'Tony' },
                 { id: 3, name: 'Zuk' },
                 { id: 4, name: 'Dick' }
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {
             friends: [
@@ -144,20 +116,6 @@ export const store: storeType = {
     getState() {
         return this._state;
     },
-    // addPost() {
-    //     let newPost = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     };
-    //     this._state.profilePage.posts.push(newPost);
-    //     this.updateNewPostText('');
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText;
-    //     this._callSubscriber(this._state);
-    // },
     subscribe(observer: any) {
         this._callSubscriber = observer;
     },
@@ -175,6 +133,19 @@ export const store: storeType = {
                 break;
             case UPDATE_NEW_POST_TEXT:
                 this._state.profilePage.newPostText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+            case UPDATE_NEW_MESSAGE_BODY:
+                this._state.dialogsPage.newMessageBody = action.newMessageBody;
+                this._callSubscriber(this._state);
+                break;
+            case SEND_MESSAGE:
+                let newMessage = {
+                    id: 5,
+                    message: this._state.dialogsPage.newMessageBody
+                };
+                this._state.dialogsPage.messages.push(newMessage);
+                this._state.dialogsPage.newMessageBody = '';
                 this._callSubscriber(this._state);
         }
     }
