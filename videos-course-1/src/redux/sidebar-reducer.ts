@@ -1,6 +1,14 @@
 import { actionsType, stateRootType } from "./state";
 
-const sidebarReducer = (state: any, action: actionsType) => {
+let initialState = {
+    friends: [
+        { id: 1, name: "Tony" },
+        { id: 2, name: "Molly" },
+        { id: 3, name: "Sanny" }
+    ]
+}
+
+const sidebarReducer = (state: any = initialState, action: actionsType) => {
 
     return state;
 }
