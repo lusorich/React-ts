@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogs-reducer"
+import profileReducer from "./profile-reducer"
+import sidebarReducer from "./sidebar-reducer"
+
 export type dialogPersonType = {
     id: number,
     name: string
@@ -64,21 +68,6 @@ export type storeType = {
     dispatch: (action: actionsType) => void
 }
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-
-export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
-export const updateNewTextActionCreator = (text: string): changeNewTextActionType => ({
-    type: UPDATE_NEW_POST_TEXT, newText: text
-})
-export const updateNewMessageBodyCreator = (text: string): changeNewMessageTextActionType => ({
-    type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: text
-})
-
-export const sendMessageCreator = (): sendMessageType => ({type: SEND_MESSAGE})
-
 export const store: storeType = {
     _callSubscriber() {
     },
@@ -120,33 +109,10 @@ export const store: storeType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                let newPost = {
-                    id: 5,
-                    message: this._state.profilePage.newPostText,
-                    likesCount: 0
-                };
-                this._state.profilePage.posts.push(newPost);
-                this._state.profilePage.newPostText = '';
-                this._callSubscriber(this._state);
-                break;
-            case UPDATE_NEW_POST_TEXT:
-                this._state.profilePage.newPostText = action.newText;
-                this._callSubscriber(this._state);
-                break;
-            case UPDATE_NEW_MESSAGE_BODY:
-                this._state.dialogsPage.newMessageBody = action.newMessageBody;
-                this._callSubscriber(this._state);
-                break;
-            case SEND_MESSAGE:
-                let newMessage = {
-                    id: 5,
-                    message: this._state.dialogsPage.newMessageBody
-                };
-                this._state.dialogsPage.messages.push(newMessage);
-                this._state.dialogsPage.newMessageBody = '';
-                this._callSubscriber(this._state);
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._callSubscriber(this._state);
     }
 }
