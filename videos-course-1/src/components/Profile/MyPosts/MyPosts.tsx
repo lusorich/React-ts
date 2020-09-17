@@ -3,30 +3,29 @@ import s from './MyPosts.module.css';
 import Post from './Post/';
 import { postType, actionsType, changeNewTextActionType } from '../../../redux/state';
 import { addPostActionCreator } from '../../../redux/profile-reducer';
+import { combineReducers } from 'redux';
 
 type propsType = {
     posts: Array<postType>,
-    dispatch: (action: actionsType) => void,
-    newPostText: string
+    newPostText: string,
+    onAddPost: () => void,
+    onChangePostText: (text: string) => void
 }
-
-
-const onChangePostTextActionCreator = (text: string): changeNewTextActionType => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: text
-})
 
 const MyPosts = (props: propsType) => {
 
-    let postsArray: any = props.posts.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
+    let postsArray = props.posts.map(post => { return (<Post message={post.message} likesCount={post.likesCount} />) });
+
     const textAreaRef = React.createRef<HTMLTextAreaElement>();
 
     const onAddPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.onAddPost();
     }
 
-    const onChangePostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(onChangePostTextActionCreator(e.currentTarget.value));
+    const onChangePostText = () => {
+        if (textAreaRef.current) {
+            props.onChangePostText(textAreaRef.current.value);
+        }
     }
 
     return (

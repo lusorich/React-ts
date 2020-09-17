@@ -3,6 +3,7 @@ import styles from './Profile.module.css';
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo';
 import { postType, actionsType } from '../../redux/state';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 type propsType = {
     state: {
@@ -16,7 +17,7 @@ const Profile = (props: propsType) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts newPostText={props.state.newPostText} posts={props.state.posts} dispatch={props.dispatch} />
+            <MyPostsContainer newPostText={props.state.newPostText} posts={props.state.posts} dispatch={props.dispatch}/>
         </div>
     )
 }

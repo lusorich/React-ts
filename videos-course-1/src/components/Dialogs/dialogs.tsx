@@ -11,7 +11,8 @@ type propsType = {
         messages: Array<messageDataType>,
         newMessageBody: string
     },
-    dispatch: (action: actionsType) => void
+    onChangeMessageBody: (newBody: string) => void,
+    onSendMessageClick: () => void
 }
 
 const Dialogs = (props: propsType) => {
@@ -21,10 +22,10 @@ const Dialogs = (props: propsType) => {
     let newMessageBody = props.state.newMessageBody;
 
     const onChangeMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyCreator(e.target.value));
+        props.onChangeMessageBody(e.currentTarget.value);
     }
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator());
+        props.onSendMessageClick();
     }
 
     return (
