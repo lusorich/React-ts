@@ -6,7 +6,7 @@ import Profile from './components/Profile/';
 import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { stateRootType, actionsType } from './redux/state';
+import { stateRootType, actionsType } from './redux/store';
 import DialogsContainer from './components/Dialogs/dialogsContainer';
 
 type propsType = {
@@ -21,8 +21,8 @@ const App = (props: propsType) => {
         <Header />
         <Sidebar state={props.state.sidebar} />
         <div className='app-wrapper-content'>
-          <Route exact path='/dialogs' render={() => <DialogsContainer state={props.state.dialogsPage} dispatch={props.dispatch} />} />
-          <Route path='/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch} />} />
+          <Route exact path='/dialogs' render={() => <DialogsContainer />} />
+          <Route path='/profile' render={() => <Profile state={props.state} dispatch={props.dispatch} />} />
         </div>
       </div>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import { actionsType, stateRootType, addPostActionType, changeNewTextActionType } from "./state";
+import { actionsType, stateRootType, addPostActionType, changeNewTextActionType } from "./store";
 
 
 const ADD_POST = 'ADD-POST';

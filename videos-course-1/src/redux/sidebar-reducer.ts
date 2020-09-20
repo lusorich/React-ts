@@ -1,4 +1,4 @@
-import { actionsType, stateRootType } from "./state";
+import { actionsType, stateRootType } from "./store";
 
 let initialState = {
     friends: [
