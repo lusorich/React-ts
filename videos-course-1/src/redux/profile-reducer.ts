@@ -1,11 +1,11 @@
-import { actionsType, stateRootType, addPostActionType, changeNewTextActionType } from "./store";
+import { actionsType, addPostActionType, changeNewTextActionType } from "./store";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
-export const updateNewTextActionCreator = (text: string): changeNewTextActionType => ({
+export const updateNewPostTextActionCreator = (text: string): changeNewTextActionType => ({
     type: UPDATE_NEW_POST_TEXT, newText: text
 })
 
@@ -26,12 +26,15 @@ const profileReducer = (state: any = initialState, action: actionsType) => {
                 message: state.newPostText,
                 likesCount: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
+            let stateCopy2 = {...state};
+            stateCopy2.posts = [...state.posts];
+            stateCopy2.posts.push(newPost);
+            stateCopy2.newPostText = '';
+            return stateCopy2;
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state};
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
         default: return state;
     }
 }

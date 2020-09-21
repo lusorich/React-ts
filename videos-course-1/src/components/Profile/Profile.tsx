@@ -4,15 +4,14 @@ import { postType, actionsType, stateRootType } from '../../redux/store';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 type propsType = {
-    state: stateRootType,
-    dispatch: (action: actionsType) => void
+    state: stateRootType
 }
 
 const Profile = (props: propsType) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer state={props.state} />
+            <MyPostsContainer />
         </div>
     )
 }

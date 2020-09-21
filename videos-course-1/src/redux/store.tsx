@@ -64,8 +64,7 @@ export type storeType = {
     _callSubscriber: (state: stateRootType) => void,
     _state: stateRootType,
     getState: () => stateRootType,
-    subscribe: (observer: any) => void,
-    dispatch: (action: actionsType) => void
+    subscribe: (observer: any) => void
 }
 
 export const store: storeType = {
@@ -107,14 +106,5 @@ export const store: storeType = {
     },
     subscribe(observer: any) {
         this._callSubscriber = observer;
-    },
-    dispatch(action) {
-
-        if (this._state && this._callSubscriber) {
-            this._state.profilePage = profileReducer(this._state.profilePage, action);
-            this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-            this._state.sidebar = sidebarReducer(this._state.sidebar, action);
-            this._callSubscriber(this._state);
-        }
     }
 }

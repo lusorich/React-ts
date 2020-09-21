@@ -11,7 +11,6 @@ import DialogsContainer from './components/Dialogs/dialogsContainer';
 
 type propsType = {
   state: stateRootType,
-  dispatch: (action: actionsType) => void
 }
 
 const App = (props: propsType) => {
@@ -22,7 +21,7 @@ const App = (props: propsType) => {
         <Sidebar state={props.state.sidebar} />
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/profile' render={() => <Profile state={props.state} dispatch={props.dispatch} />} />
+          <Route path='/profile' render={() => <Profile state={props.state} />} />
         </div>
       </div>
     </BrowserRouter>

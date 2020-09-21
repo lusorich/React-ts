@@ -8,20 +8,14 @@ import reduxStore from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-export let rerenderEntireTree = (state: stateRootType) => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <Provider store={reduxStore}>
-          <App state={reduxStore.getState()} dispatch={store.dispatch}/>
+          <App state={reduxStore.getState()} />
         </Provider>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
   )
-};
 
-rerenderEntireTree(reduxStore.getState());
-reduxStore.subscribe(() => {
-  rerenderEntireTree(reduxStore.getState());
-});

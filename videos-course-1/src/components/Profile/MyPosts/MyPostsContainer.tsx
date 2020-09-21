@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostActionCreator, updateNewTextActionCreator } from '../../../redux/profile-reducer';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 
 // type propsType = {
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch: any) => {
             dispatch(addPostActionCreator());
         },
         onChangePostText: (text: string) => {
-            dispatch(updateNewTextActionCreator(text));
+            dispatch(updateNewPostTextActionCreator(text));
         }
     }
 }
