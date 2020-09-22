@@ -12,8 +12,8 @@ type propsType = {
 
 const Dialogs = (props: propsType) => {
 
-    const dialogsArray: any = props.dialogsPage.dialogs.map((el: any) => <div className={s.dialogItem}> <DialogItem name={el.name} id={el.id} /></div>);
-    const messageArray: any = props.dialogsPage.messages.map((el: any) => <Message message={el.message} id={el.id} />);
+    const dialogsArray: any = props.dialogsPage.dialogs.map((el: any) => <div className={s.dialogItem}> <DialogItem name={el.name} id={el.id} key={el.id}/></div>);
+    const messageArray: any = props.dialogsPage.messages.map((el2: any) => <Message message={el2.message} id={el2.id} key={el2.id}/>);
 
     const onChangeMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessageBody(e.currentTarget.value);

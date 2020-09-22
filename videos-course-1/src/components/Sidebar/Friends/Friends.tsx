@@ -12,7 +12,7 @@ type propsType = {
 const Friends = (props: propsType) => {
     const friends = props.state.friends.map((friend) => {
         return (
-            <Friend friend={friend.name} />
+            <Friend friend={friend.name} key={friend.id}/>
         )
     })
 
