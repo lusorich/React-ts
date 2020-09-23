@@ -14,6 +14,5 @@ let reducers = combineReducers({
 
 let reduxStore = createStore(reducers);
 
-console.log(reduxStore);
 
 export default reduxStore;

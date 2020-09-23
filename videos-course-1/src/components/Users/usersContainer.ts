@@ -1,4 +1,4 @@
-import {changeFollowedCreator} from '../../redux/users-reducer';
+import {changeFollowedCreator, setUsersCreator} from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import Users from '../Users/Users';
 
@@ -10,8 +10,10 @@ let mapStateToProps = (state: any) => ({
 let mapDispatchToProps = (dispatch: any) => {
     return {
         onChangeFollowed: (userId: string) => {
-            console.log(userId);
             dispatch(changeFollowedCreator(userId));
+        },
+        setUsers: (users: any) => {
+            dispatch(setUsersCreator(users));
         }
     }
 }

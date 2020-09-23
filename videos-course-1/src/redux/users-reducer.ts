@@ -4,11 +4,22 @@ type changeFollowed = {
     userId: string
 }
 
+type setUsers = {
+    type: 'SET_USERS',
+    users: any
+}
+
 const CHANGE_FOLLOWED = 'CHANGE_FOLLOWED';
+const SET_USERS = 'SET_USERS';
 
 export const changeFollowedCreator = (userId: string): changeFollowed => ({
     type: CHANGE_FOLLOWED,
     userId: userId
+})
+
+export const setUsersCreator = (users: any): setUsers => ({
+    type: SET_USERS,
+    users: users
 })
 
 const initialState = {
@@ -38,9 +49,11 @@ const usersReducer = (state: any = initialState, action: any) => {
                     }
                     return user;
                 })
-            };
-            console.log(copyState);
+            }
             return copyState;
+        case SET_USERS:
+            let copyState2 = {...state, users: action.users}
+            return copyState2;
         default: return state;
     }
 }
