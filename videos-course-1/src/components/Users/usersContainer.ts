@@ -1,6 +1,6 @@
 import {changeFollowedCreator, setUsersCreator} from '../../redux/users-reducer';
 import { connect } from 'react-redux';
-import Users from '../Users/Users';
+import UsersC from './UsersC';
 
 
 let mapStateToProps = (state: any) => ({
@@ -18,6 +18,6 @@ let mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC);
 
 export default UsersContainer;

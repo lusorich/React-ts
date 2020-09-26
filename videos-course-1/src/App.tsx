@@ -3,7 +3,6 @@ import './App.css';
 import Header from './components/Header/';
 import Sidebar from './components/Sidebar';
 import Profile from './components/Profile/';
-import Dialogs from './components/Dialogs/';
 import { Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { stateRootType, actionsType } from './redux/store';
