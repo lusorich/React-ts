@@ -1,28 +1,23 @@
 import React from 'react';
 import axios from 'axios';
 import userPhoto from '../../assets/images/nagiev.jpg';
+import s from './Users.module.css';
+import { isThrowStatement } from 'typescript';
+
 
 interface IUsersProps {
     users: any,
     setUsers: any,
-    onChangeFollowed: any
+    onChangeFollowed: any,
+    pageSize: any,
+    totalUsersCount: any,
+    currentPage: any,
+    setCurrentPage: any
 }
 
 class UsersC extends React.Component<IUsersProps> {
-    getUsers = () => {
-        if (this.props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                console.log(response.data.items);
-                let users = response.data.items
-                this.props.setUsers(users);
-            });
-        }
-
-    }
-
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            console.log(response.data.items);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             let users = response.data.items
             this.props.setUsers(users);
         });
@@ -34,8 +29,18 @@ class UsersC extends React.Component<IUsersProps> {
     }
 
     render(): any {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+
+        for (let i = 0; i < pagesCount; i++) {
+            pages.push(i);
+        }
+
         return (<div>
-            <button onClick={this.getUsers}>Click</button>
+            <div>
+                {pages.map(p => { return (<span onClick={ () => { this.props.setCurrentPage(p)} } className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>) })}
+            </div>
             {this.props.users.map((user: any) =>
                 <ul key={user.id}>
                     <li>

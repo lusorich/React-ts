@@ -23,6 +23,12 @@ console.log('lesson 2');
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
+const sum = (firstNum) => {
+  return (secondNum) => {
+    return firstNum + secondNum;
+  }
+}
+
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -32,6 +38,12 @@ console.log('lesson 2');
 // const counter2 = makeCounter();
 // counter2(); // 1
 // counter3(); // 3
+const makeCounter = () => {
+  let count = 0;
+  return () => {
+    return count += 1;
+  }
+}
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
@@ -40,6 +52,24 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+class Counter {
+  constructor(num) {
+    this.num = num;
+  }
+  increase() {
+    this.num += 1;
+  }
+  decrease() {
+    this.num -= 1;
+  }
+  reset() {
+    this.num = 0;
+  }
+  set(newNum) {
+    this.num = newNum;
+  }
+}
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -50,6 +80,29 @@ console.log('lesson 2');
 // 4) superSum(3)(2,5,3) //10
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
+
+const superSum = (num) => {
+    if (num === 0) {
+        return num;
+    }
+    let sum = 0;
+    let count = 0;
+    const innerFunc = (...args) => {
+        if (count === num) {
+            return sum;
+        } else {
+            for (let i = 0; i < args.length; i++) {
+                count++;
+                sum += args[i];
+                if (count === num) {
+                    return sum;
+                }
+            }
+        }
+        return innerFunc;
+    }
+    return innerFunc;
+}
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 

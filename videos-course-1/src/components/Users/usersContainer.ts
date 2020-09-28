@@ -1,19 +1,25 @@
-import {changeFollowedCreator, setUsersCreator} from '../../redux/users-reducer';
+import {changeFollowedAC, setCurrentPageAC, setUsersCreatorAC} from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import UsersC from './UsersC';
 
 
 let mapStateToProps = (state: any) => ({
-    users: state.usersPage.users
+    users: state.usersPage.users,
+    pageSize: state.usersPage.pageSize,
+    totalUsersCount: state.usersPage.totalUsersCount,
+    currentPage: state.usersPage.currentPage
 })
 
 let mapDispatchToProps = (dispatch: any) => {
     return {
         onChangeFollowed: (userId: string) => {
-            dispatch(changeFollowedCreator(userId));
+            dispatch(changeFollowedAC(userId));
         },
         setUsers: (users: any) => {
-            dispatch(setUsersCreator(users));
+            dispatch(setUsersCreatorAC(users));
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage));
         }
     }
 }
