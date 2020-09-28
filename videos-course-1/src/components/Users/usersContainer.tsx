@@ -1,3 +1,5 @@
+import { changeFollowedAC, setCurrentPageAC, setUsersCreatorAC, setUsersTotalCountAC } from '../../redux/users-reducer';
+import { connect } from 'react-redux';
 import React from 'react';
 import axios from 'axios';
 import Users from './Users';
@@ -14,7 +16,7 @@ interface IUsersProps {
     setUsersTotalCount: any
 }
 
-class UsersAPIComponent extends React.Component<IUsersProps> {
+class UsersContainer extends React.Component<IUsersProps> {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             let users = response.data.items
@@ -43,6 +45,28 @@ class UsersAPIComponent extends React.Component<IUsersProps> {
     }
 }
 
+let mapStateToProps = (state: any) => ({
+    users: state.usersPage.users,
+    pageSize: state.usersPage.pageSize,
+    totalUsersCount: state.usersPage.totalUsersCount,
+    currentPage: state.usersPage.currentPage
+})
 
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        onChangeFollowed: (userId: string) => {
+            dispatch(changeFollowedAC(userId));
+        },
+        setUsers: (users: any) => {
+            dispatch(setUsersCreatorAC(users));
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage));
+        },
+        setUsersTotalCount: (totalCount: number) => {
+            dispatch(setUsersTotalCountAC(totalCount));
+        }
+    }
+}
 
-export default UsersAPIComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);;
