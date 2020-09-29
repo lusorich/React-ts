@@ -26,7 +26,7 @@ const Users = (props: any) => {
                 <li>
                     <div>
                         <img style={styleImg} src={user.photos.small == null ? userPhoto : user.photos.small}></img>
-                        <button onClick={() => { props.onChangeFollowed(user.id) }}>{user.followed ? 'Follow' : 'Unfollow'}</button>
+                        <button onClick={() => { props.changeFollowed(user.id) }}>{user.followed ? 'Follow' : 'Unfollow'}</button>
                     </div>
                     <div>
                         <span>{user.name}</span>
