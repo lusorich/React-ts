@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import userPhoto from '../../assets/images/nagiev.jpg';
 import s from './Users.module.css';
 
@@ -25,7 +26,7 @@ const Users = (props: any) => {
             <ul key={user.id}>
                 <li>
                     <div>
-                        <img style={styleImg} src={user.photos.small == null ? userPhoto : user.photos.small}></img>
+                        <NavLink to={`/profile/${user.id}`} ><img style={styleImg} src={user.photos.small == null ? userPhoto : user.photos.small}></img></NavLink>
                         <button onClick={() => { props.changeFollowed(user.id) }}>{user.followed ? 'Follow' : 'Unfollow'}</button>
                     </div>
                     <div>
