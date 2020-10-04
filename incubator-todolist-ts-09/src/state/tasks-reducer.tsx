@@ -1,31 +1,57 @@
 import { TasksStateType } from '../App';
-import {v1} from 'uuid';
+import { v1 } from 'uuid';
 
 export type RemoveTaskActionType = {
-    type: 'REMOVE-TODOLIST',
-    id: string
+    type: 'REMOVE-TASK',
+    taskId: string,
+    todoListId: string
 }
 export type AddTaskActionType = {
-    type: 'ADD-TODOLIST',
-    title: string
+    type: 'ADD-TASK',
+    title: string,
+    todoListId: string
 }
 
 type ActionsType = RemoveTaskActionType | AddTaskActionType;
 
-export const taskReducer = (state: Array<TasksStateType>, action: ActionsType) => {
+// let [tasks, setTasks] = useState<TasksStateType>({
+// 
+//     [todolistId2]: [
+//         {id: v1(), title: "Milk", isDone: true},
+//         {id: v1(), title: "React Book", isDone: true}
+//     ]
+// 
+//     [todolistId2]: [
+//         {id: v1(), title: "Milk", isDone: true},
+//         {id: v1(), title: "React Book", isDone: true}
+//     ]
+// });
+
+export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
+    let copyTasks = state[action.todoListId];
     switch (action.type) {
-        case 'REMOVE-TODOLIST':
-            return state;
-        case 'ADD-TODOLIST':
-            return state;
+        case 'REMOVE-TASK':
+            copyTasks = copyTasks.filter((i: any) => { return i.id !== action.taskId });
+            return { ...state, [action.todoListId]: [...copyTasks] };
+        case 'ADD-TASK':
+            return {
+                ...state, [action.todoListId]: [
+                    {
+                        id: v1(),
+                        title: action.title,
+                        isDOne: false
+                    }, ...copyTasks
+                ]
+            };
         default:
             throw new Error("I don't understand this type")
     }
 }
 
-export const RemoveTodolistAC = (todolistId: string): RemoveTaskActionType => {
-    return { type: 'REMOVE-TODOLIST', id: todolistId}
+export const RemoveTaskAC = (taskId: string, todoListId: string): RemoveTaskActionType => {
+    return { type: 'REMOVE-TASK', todoListId: todoListId, taskId: taskId }
 }
-export const AddTodolistAC = (title: string): AddTaskActionType => {
-    return { type: 'ADD-TODOLIST', title: title}
+
+export const AddTaskAC = ( title: string, todoListId: string): AddTaskActionType => {
+    return { type: 'ADD-TASK', todoListId, title,}
 }
