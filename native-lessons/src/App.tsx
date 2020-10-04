@@ -1,9 +1,10 @@
 import React from 'react';
-import './lessons/lesson2/lesson2';
+import './lessons/lesson3/lesson3';
+import Lesson3 from './lessons/advLesson3/Lesson3';
 
 function App() {
   return (
-    <h1>To connect your lesson, change the import path in the App.tsx!</h1>
+    <Lesson3 />
   );
 }
 
