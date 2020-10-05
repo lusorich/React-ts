@@ -6,9 +6,9 @@ import {Button, Checkbox, IconButton} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
 
 export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
+    id: string,
+    title: string,
+    isDone: boolean,
 }
 
 type PropsType = {
