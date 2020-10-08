@@ -74,7 +74,7 @@ function AppWithRedux() {
     const addTodolist = useCallback(function addTodolist(title: string) {
         const action = addTodolistAC(title);
         dispatch(action);
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="App">
