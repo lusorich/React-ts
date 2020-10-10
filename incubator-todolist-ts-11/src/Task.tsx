@@ -22,14 +22,14 @@ type PropsType = {
 
 export const Task = React.memo(function Todolist(props: PropsType) {
 
-    const onClickHandler = () => props.removeTask(props.idTask, props.idTodolist)
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onClickHandler = useCallback(() => props.removeTask(props.idTask, props.idTodolist), [])
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = e.currentTarget.checked;
         props.changeTaskStatus(props.idTask, newIsDoneValue, props.idTodolist);
-    }
+    }, [])
     const onTitleChangeHandler = useCallback((newValue: string) => {
         props.changeTaskTitle(props.idTask, newValue, props.idTodolist);
-    }, [props.idTask,props.idTodolist])
+    }, [])
 
     return <div>
         <div>
