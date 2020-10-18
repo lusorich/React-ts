@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
-import { actionsType, storeType, updateMinNumberAC, updateMaxNumberAC } from '../../store/store';
+import { actionsType, storeType, updateMinNumberAC, updateMaxNumberAC, updateResAC } from '../../store/store';
+import s from './leftSide.module.css';
 
 type propsType = {
     store: storeType,
@@ -7,29 +8,36 @@ type propsType = {
 }
 
 const LeftSide = (props: propsType) => {
-    console.log(props.store.getState());
-
     const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
         props.dispatch(updateMinNumberAC(+e.currentTarget.value));
-        console.log(props.store.getState());
     }
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         props.dispatch(updateMaxNumberAC(+e.currentTarget.value));
-        console.log(props.store.getState());
+    }
+    const onClickHandler = () => {
+        if (props.store.getState().min >= props.store.getState().max) {
+            alert('Error');
+            updateResAC(0)
+            return;
+        }
+        props.dispatch(updateResAC(props.store.getState().min));
     }
 
+
     return (
-        <div>
-            <div>
-                <span>min value:</span>
-                <input onChange={onChangeMinValue} type='number' min='0' max='15'></input>
+        <div className={s['settings']}>
+            <div className={s['wrapper']}>
+                <div className={s['wrapper-inner']}>
+                    <span>min value:</span>
+                    <input onChange={onChangeMinValue} value={props.store.getState().min} type='number' min='0' max='15'></input>
+                </div>
+                <div className={s['wrapper-inner']}>
+                    <span>max value:</span>
+                    <input onChange={onChangeMaxValue} value={props.store.getState().max} type='number' min='0' max='15'></input>
+                </div>
             </div>
-            <div>
-                <span>max value:</span>
-                <input onChange={onChangeMaxValue} type='number' min='0' max='15'></input>
-            </div>
-            <div>
-                <button>set</button>
+            <div className={s['wrapper-button']}>
+                <button className={s['settings__button']} onClick={onClickHandler}>set</button>
             </div>
         </div>
     )
