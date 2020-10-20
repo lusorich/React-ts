@@ -1,0 +1,54 @@
+.result__button {
+  font-family: "Georgia", sans-serif;
+  font-size: 22px;
+  margin: 5px;
+  background-color: inherit;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.result__button--unactive {
+  color: red;
+}
+
+.result__count-value {
+  font-family: "Georgia", sans-serif;
+  font-size: 16px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+@media (max-width: 1000px) {
+  .result {
+    width: 40%;
+  }
+}
+
+.result__count-wrapper {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  margin: auto auto 25px auto;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.result__settings-wrapper {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
