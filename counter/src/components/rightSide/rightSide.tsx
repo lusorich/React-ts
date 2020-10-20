@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { storeType, updateResAC } from '../../store/store';
 import s from './rightSide.module.css';
 
@@ -8,24 +10,43 @@ type propsType = {
 
 const RightSide = (props: propsType) => {
 
+    const minValue = props.store.getState().min;
+    const maxValue = props.store.getState().max;
+    let resValue = props.store.getState().res;
+
+    let [isError, setError] = useState(false);
+    let [textError, setTextError] = useState('');
+
+    useEffect(() => {
+        if (minValue === maxValue) {
+            setError(true);
+            setTextError('Значения не должны быть равны')
+        }
+        if (minValue < 0 || maxValue < 0) {
+            setError(true);
+            setTextError('Значение должно быть меньше нуля')
+        }
+    })
+
+
     const incClickHandler = () => {
-        if (props.store.getState().res < props.store.getState().max) {
-            props.store.dispatch(updateResAC(props.store.getState().res += 1))
+        if (resValue < maxValue) {
+            props.store.dispatch(updateResAC(resValue += 1))
         } else {
             alert('Mnogo');
         }
     }
     const resClickHandler = () => {
-        props.store.dispatch(updateResAC(props.store.getState().min))
+        props.store.dispatch(updateResAC(minValue));
     }
     return (
-        <div>
-            <div>
-                <input type='text' value={props.store.getState().res}></input>
+        <div className={s['result']}>
+            <div className={s['result__count-wrapper']}>
+                <input type='text' value={isError ? textError : resValue}></input>
             </div>
-            <div>
+            <div className={s['result__settings-wrapper']}>
                 <button className={
-                    props.store.getState().res < props.store.getState().max ? 'def' : s.unactive}
+                    resValue < maxValue ? 'def' : s.unactive}
                     onClick={incClickHandler}>inc</button>
                 <button onClick={resClickHandler}>reset</button>
             </div>

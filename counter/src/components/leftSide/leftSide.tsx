@@ -29,11 +29,11 @@ const LeftSide = (props: propsType) => {
             <div className={s['wrapper']}>
                 <div className={s['wrapper-inner']}>
                     <span>min value:</span>
-                    <input onChange={onChangeMinValue} value={props.store.getState().min} type='number' min='0' max='15'></input>
+                    <input onChange={onChangeMinValue} value={props.store.getState().min} type='number'></input>
                 </div>
                 <div className={s['wrapper-inner']}>
                     <span>max value:</span>
-                    <input onChange={onChangeMaxValue} value={props.store.getState().max} type='number' min='0' max='15'></input>
+                    <input onChange={onChangeMaxValue} value={props.store.getState().max} type='number'></input>
                 </div>
             </div>
             <div className={s['wrapper-button']}>
