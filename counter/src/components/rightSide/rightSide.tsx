@@ -42,13 +42,13 @@ const RightSide = (props: propsType) => {
     return (
         <div className={s['result']}>
             <div className={s['result__count-wrapper']}>
-                <input type='text' value={isError ? textError : resValue}></input>
+                <textarea className={s['result__count-value']} value={isError ? textError : resValue}></textarea>
             </div>
             <div className={s['result__settings-wrapper']}>
                 <button className={
-                    resValue < maxValue ? 'def' : s.unactive}
+                    resValue < maxValue ? s['result__button'] : `${s['result__button']} ${s['result__button--unactive']}`}
                     onClick={incClickHandler}>inc</button>
-                <button onClick={resClickHandler}>reset</button>
+                <button className={s['result__button']} onClick={resClickHandler}>reset</button>
             </div>
         </div>
     )

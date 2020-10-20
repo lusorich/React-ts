@@ -1,5 +1,21 @@
-.unactive {
+.result__button {
+  font-family: "Georgia", sans-serif;
+  font-size: 22px;
+  margin: 5px;
+  background-color: inherit;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.result__button--unactive {
   color: red;
+}
+
+.result__count-value {
+  font-family: "Georgia", sans-serif;
+  font-size: 16px;
+  border: 0;
+  border-radius: 8px;
 }
 
 .result {
@@ -9,6 +25,12 @@
   border: 1px solid black;
   border-radius: 8px;
   padding: 5px;
+}
+
+@media (max-width: 1000px) {
+  .result {
+    width: 40%;
+  }
 }
 
 .result__count-wrapper {
