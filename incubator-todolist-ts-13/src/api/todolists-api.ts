@@ -1,5 +1,4 @@
-import { AddBoxOutlined } from '@material-ui/icons';
-import axios from 'axios';
+import axios, { ResponseType } from 'axios';
 
 const settings = {
     withCredentials: true,
@@ -8,6 +7,11 @@ const settings = {
     }
 }
 
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    ...settings
+})
+
 export type todolistType = {
     id: string,
     title: string,
@@ -15,42 +19,72 @@ export type todolistType = {
     order: number
 }
 
-type responseType<D> = {
+export type TaskType = {
+    description: string,
+    title: string,
+    completed: boolean,
+    priority: number,
+    startDate: string,
+    deadline: string,
+    id: string,
+    todolistId: string,
+    order: number,
+    addedDate: string
+
+}
+
+type responseType<D = {}> = {
     resultCode: number,
     messages: Array<string>,
     data: D
 }
 
+type getTasksResponse = {
+    error: string | null,
+    totalCount: number,
+    items: TaskType[]
+}
+
+type createUpdateTaskResponse = {
+    data: {
+        item: TaskType
+    },
+    resultCode: number,
+    messages: Array<string>
+}
+
+
+
 export const todolistsAPI = {
     getTodolists() {
-        return axios.get<Array<todolistType>>("https://social-network.samuraijs.com/api/1.1/todo-lists", settings);
+        return instance.get<Array<todolistType>>('todo-lists');
     },
     createTodolist(newTitle: string) {
-        return axios.post<responseType<{ item: todolistType }>>("https://social-network.samuraijs.com/api/1.1/todo-lists", {
+        return instance.post<responseType<{ item: todolistType }>>("todo-lists", {
             title: newTitle
-        }, settings)
+        })
     },
     deleteTodoilst(todolistId: string) {
-        return axios.delete<responseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, settings)
+        return instance.delete<responseType>(`todo-lists/${todolistId}`)
     },
     updateTodolist(todolistId: string, newTitle: string) {
-        return axios.put<responseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`, { title: newTitle }, settings)
+        return instance.put<responseType>(`todo-lists/${todolistId}`, { title: newTitle })
     },
     getTasks(todolistId: string) {
-        return axios.get("https://social-network.samuraijs.com/api/1.1/todo-lists/" + todolistId + "/tasks", settings);
+        return instance.get<getTasksResponse>("todo-lists/" + todolistId + "/tasks");
     },
     createTask(todolistId: string, title: string) {
-        return axios.post("https://social-network.samuraijs.com/api/1.1/todo-lists/" + todolistId + "/tasks", {
+        return instance.post<createUpdateTaskResponse>("todo-lists/" + todolistId + "/tasks", {
             title: title
-        }, settings);
+        });
     },
     updateTask(todolistId: string, newTitle: string) {
-        return axios.put("https://social-network.samuraijs.com/api/1.1/todo-lists/" + todolistId + "/tasks", {
+        return instance.put<createUpdateTaskResponse>("todo-lists/" + todolistId + "/tasks", {
             title: newTitle
-        }, settings);
+        });
     },
     deleteTask(todolistId: string, taskId: string) {
-        return axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks/${taskId}`, settings)
+        return instance.delete<responseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     }
 
 }
