@@ -1,0 +1,8 @@
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+  background-color: #dff0ff;
+}
