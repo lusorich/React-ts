@@ -9,6 +9,7 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC, FilterValuesType,
+    getTodolistsThunk,
     removeTodolistAC, setTodolistsAC, TodolistDomainType,
     todolistsReducer
 } from './state/todolists-reducer'
@@ -73,10 +74,7 @@ function AppWithRedux() {
     }, [dispatch]);
 
     useEffect(() => {
-        todolistsAPI.getTodolists()
-            .then((res) => {
-                dispatch(setTodolistsAC(res.data));
-            })
+        dispatch(getTodolistsThunk);
     }, [])
 
     return (
