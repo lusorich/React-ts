@@ -3,7 +3,7 @@ import axios from 'axios'
 const settings = {
     withCredentials: true,
     headers: {
-        'API-KEY': '1cdd9f77-c60e-4af5-b194-659e4ebd5d41'
+        'API-KEY': '1141da07-ebec-4731-a397-21d7e8f5304a'
     }
 }
 
@@ -73,7 +73,7 @@ export const todolistsAPI = {
         return promise;
     },
     createTodolist(title: string) {
-        const promise = instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', {title: title});
+        const promise = instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', { title: title });
         return promise;
     },
     deleteTodolist(id: string) {
@@ -81,7 +81,7 @@ export const todolistsAPI = {
         return promise;
     },
     updateTodolist(id: string, title: string) {
-        const promise = instance.put<ResponseType>(`todo-lists/${id}`, {title: title});
+        const promise = instance.put<ResponseType>(`todo-lists/${id}`, { title: title });
         return promise;
     },
     getTasks(todolistId: string) {
@@ -91,9 +91,9 @@ export const todolistsAPI = {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
     },
     createTask(todolistId: string, taskTitile: string) {
-        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: taskTitile});
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, { title: taskTitile });
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
-        return instance.put<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }
