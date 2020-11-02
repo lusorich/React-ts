@@ -5,7 +5,7 @@ import axios from 'axios';
 import Users from './Users';
 import preloader from './../../assets/images/preloader.gif';
 import Preloader from '../common/preloader/preloader';
-import { getUsers } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 
 interface IUsersProps {
@@ -24,7 +24,7 @@ interface IUsersProps {
 class UsersContainer extends React.Component<IUsersProps> {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             let users = data.items
             this.props.setUsers(users);
             this.props.setUsersTotalCount(data.totalCount);
@@ -35,7 +35,7 @@ class UsersContainer extends React.Component<IUsersProps> {
     onPageChanged = (page: any) => {
         this.props.setCurrentPage(page);
         this.props.toggleIsFetching(true);
-        getUsers(page, this.props.pageSize).then(data => {
+        usersAPI.getUsers(page, this.props.pageSize).then(data => {
             let users = data.items
             this.props.setUsers(users);
             this.props.toggleIsFetching(false);

@@ -4,7 +4,7 @@ import Header from './Header';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUserDataAC } from './../../redux/auth-reducer';
-import { authApi } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 interface IAuthProps {
     setUserDataAC: any
@@ -13,7 +13,7 @@ interface IAuthProps {
 class HeaderContainer extends React.Component<IAuthProps> {
 
     componentDidMount() {
-          authApi().then(response => {
+          usersAPI.authApi().then(response => {
                 if (response.resultCode === 0) {
                     let { id, login, email } = response.data;
                     this.props.setUserDataAC(id, email, login)
