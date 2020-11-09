@@ -1,3 +1,5 @@
+import { Dispatch } from "redux"
+import { usersAPI } from "../api/api"
 
 type changeFollowed = {
     type: 'CHANGE_FOLLOWED',
@@ -62,6 +64,26 @@ export const toggleFollowingProgress = (isFollowing: any, userId: any) => ({
     isFollowing,
     userId
 })
+
+export const getUsersThunkCreator = (currentPage: any, pageSize: any) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        let users = data.items
+        dispatch(setUsers(users));
+        dispatch(setUsersTotalCount(data.totalCount));
+        dispatch(toggleIsFetching(false));
+    });
+}
+
+export const onPageChangedThunkCreator = (page: any, pageSize: any) => (dispatch: Dispatch) => {
+    dispatch(setCurrentPage(page));
+    dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(page, pageSize).then(data => {
+            let users = data.items
+            dispatch(setUsers(users));
+            dispatch(toggleIsFetching(false));
+        });
+}
 
 const initialState = {
     users: [],

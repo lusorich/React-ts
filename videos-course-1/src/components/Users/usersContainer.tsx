@@ -1,9 +1,7 @@
-import { changeFollowed, toggleFollowingProgress, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching } from '../../redux/users-reducer';
+import { changeFollowed, toggleFollowingProgress, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching, getUsersThunkCreator, onPageChangedThunkCreator } from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import React from 'react';
-import axios from 'axios';
 import Users from './Users';
-import preloader from './../../assets/images/preloader.gif';
 import Preloader from '../common/preloader/preloader';
 import { usersAPI } from '../../api/api';
 
@@ -20,28 +18,18 @@ interface IUsersProps {
     isFetching: any,
     toggleIsFetching: any,
     toggleFollowingProgress: any,
-    followingInProgress: any
+    followingInProgress: any,
+    getUsers: any,
+    onPageChangedThunkCreator: any
 }
 
 class UsersContainer extends React.Component<IUsersProps> {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            let users = data.items
-            this.props.setUsers(users);
-            this.props.setUsersTotalCount(data.totalCount);
-            this.props.toggleIsFetching(false);
-        });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (page: any) => {
-        this.props.setCurrentPage(page);
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(page, this.props.pageSize).then(data => {
-            let users = data.items
-            this.props.setUsers(users);
-            this.props.toggleIsFetching(false);
-        });
+        this.props.onPageChangedThunkCreator(page, this.props.pageSize);
     }
     render(): any {
         return <>
@@ -76,5 +64,7 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setUsersTotalCount,
     toggleIsFetching,
-    toggleFollowingProgress
+    toggleFollowingProgress,
+    getUsers: getUsersThunkCreator,
+    onPageChangedThunkCreator
 })(UsersContainer);;
