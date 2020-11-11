@@ -65,7 +65,7 @@ export const toggleFollowingProgress = (isFollowing: any, userId: any) => ({
     userId
 })
 
-export const getUsersThunkCreator = (currentPage: any, pageSize: any) => (dispatch: Dispatch) => {
+export const getUsers = (currentPage: any, pageSize: any) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true));
     usersAPI.getUsers(currentPage, pageSize).then(data => {
         let users = data.items
@@ -75,13 +75,35 @@ export const getUsersThunkCreator = (currentPage: any, pageSize: any) => (dispat
     });
 }
 
-export const onPageChangedThunkCreator = (page: any, pageSize: any) => (dispatch: Dispatch) => {
+export const onPageChanged = (page: any, pageSize: any) => (dispatch: Dispatch) => {
     dispatch(setCurrentPage(page));
     dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(page, pageSize).then(data => {
-            let users = data.items
-            dispatch(setUsers(users));
-            dispatch(toggleIsFetching(false));
+    usersAPI.getUsers(page, pageSize).then(data => {
+        let users = data.items
+        dispatch(setUsers(users));
+        dispatch(toggleIsFetching(false));
+    });
+}
+
+export const userFollow = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.followApi(userId)
+        .then(response => {
+            dispatch(toggleFollowingProgress(true, userId));
+            if (response.resultCode === 0) {
+                dispatch(changeFollowed(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId));
+        });
+}
+
+export const userUnfollow = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.unfollowApi(userId)
+        .then(response => {
+            dispatch(toggleFollowingProgress(true, userId));
+            if (response.resultCode === 0) {
+                dispatch(changeFollowed(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId));
         });
 }
 

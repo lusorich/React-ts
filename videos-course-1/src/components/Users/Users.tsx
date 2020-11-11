@@ -31,20 +31,8 @@ const Users = (props: any) => {
                         <NavLink to={`/profile/${user.id}`} ><img style={styleImg} src={user.photos.small == null ? userPhoto : user.photos.small}></img></NavLink>
                         <button disabled={props.followingInProgress.some((id: any) => id === user.id)} onClick={() => {
                             props.toggleFollowingProgress(true, user.id);
-                            usersAPI.followApi(user.id)
-                                .then(response => {
-                                    if (response.resultCode === 0) {
-                                        props.changeFollowed(user.id)
-                                    }
-                                    props.toggleFollowingProgress(false, user.id);
-                                });
-
-                            usersAPI.unfollowApi(user.id).then(response => {
-                                if (response.resultCode === 0) {
-                                    props.changeFollowed(user.id)
-                                }
-                                props.toggleFollowingProgress(false, user.id);
-                            });
+                            props.userFollow(user.id);
+                            props.userUnfollow(user.id);
                         }}>{user.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                     <div>

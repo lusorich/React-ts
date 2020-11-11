@@ -1,4 +1,4 @@
-import { changeFollowed, toggleFollowingProgress, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching, getUsersThunkCreator, onPageChangedThunkCreator } from '../../redux/users-reducer';
+import { changeFollowed, toggleFollowingProgress, setCurrentPage, setUsers, setUsersTotalCount, userFollow, getUsers, onPageChanged, userUnfollow } from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import React from 'react';
 import Users from './Users';
@@ -16,11 +16,12 @@ interface IUsersProps {
     setCurrentPage: any,
     setUsersTotalCount: any,
     isFetching: any,
-    toggleIsFetching: any,
     toggleFollowingProgress: any,
     followingInProgress: any,
     getUsers: any,
-    onPageChangedThunkCreator: any
+    onPageChanged: any,
+    userFollow: any,
+    userUnfollow: any
 }
 
 class UsersContainer extends React.Component<IUsersProps> {
@@ -29,7 +30,7 @@ class UsersContainer extends React.Component<IUsersProps> {
     }
 
     onPageChanged = (page: any) => {
-        this.props.onPageChangedThunkCreator(page, this.props.pageSize);
+        this.props.onPageChanged(page, this.props.pageSize);
     }
     render(): any {
         return <>
@@ -43,6 +44,8 @@ class UsersContainer extends React.Component<IUsersProps> {
                 changeFollowed={this.props.changeFollowed}
                 followingInProgress={this.props.followingInProgress}
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
+                userFollow={this.props.userFollow}
+                userUnfollow={this.props.userUnfollow}
             />
         </>
     }
@@ -63,8 +66,9 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setUsersTotalCount,
-    toggleIsFetching,
     toggleFollowingProgress,
-    getUsers: getUsersThunkCreator,
-    onPageChangedThunkCreator
+    getUsers,
+    onPageChanged,
+    userFollow,
+    userUnfollow
 })(UsersContainer);;
