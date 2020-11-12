@@ -1,3 +1,7 @@
+import { useImperativeHandle } from "react";
+import { Dispatch } from "redux";
+import { usersAPI } from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA';
 
 const initialState = {
@@ -5,6 +9,14 @@ const initialState = {
     email: null,
     login: null,
     isAuth: false
+}
+
+export const getAuthUser = () => (dispatch: Dispatch) => {
+    return usersAPI.authApi()
+        .then(res => {
+            const { userId, email, login } = res.data;
+            dispatch(setUserDataAC(userId, email, login));
+        })
 }
 
 const authReducer = (state: any = initialState, action: any) => {

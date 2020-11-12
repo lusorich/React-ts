@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+import { usersAPI } from "../api/api";
 import { actionsType, addPostActionType, changeNewTextActionType } from "./store";
 
 
@@ -13,6 +15,11 @@ export const setUserProfile = (profile: any) => ({
     type: SET_USER_PROFILE,
     profile
 })
+
+export const getProfile = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfileAPI(userId)
+        .then((res) => dispatch(setUserProfile(res)));
+}
 
 let initialState = {
     posts: [
@@ -43,7 +50,7 @@ const profileReducer = (state: any = initialState, action: any) => {
                 newPostText: action.newText
             };
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile};
+            return { ...state, profile: action.profile };
         default: return state;
     }
 }
