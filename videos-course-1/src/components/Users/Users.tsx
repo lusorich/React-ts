@@ -1,11 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import userPhoto from '../../assets/images/nagiev.jpg';
+import { UsersType } from '../../redux/users-reducer';
 import s from './Users.module.css';
-import axios from 'axios';
-import { usersAPI } from '../../api/api';
 
-const Users = (props: any) => {
+
+type PropsType = {
+    totalUsersCount: any,
+    pageSize: number,
+    currentPage: number,
+    onPageChanged: any,
+    users: UsersType,
+    followingInProgress: Array<boolean>,
+    toggleFollowingProgress: any,
+    userFollow: any,
+    userUnfollow: any
+}
+
+const Users = (props: PropsType) => {
 
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -19,6 +31,7 @@ const Users = (props: any) => {
         width: '100px',
         height: '100px'
     }
+    console.log(props.users);
 
     return <div>
         <div>

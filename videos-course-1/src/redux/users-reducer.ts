@@ -1,30 +1,70 @@
 import { Dispatch } from "redux"
 import { usersAPI } from "../api/api"
 
-type changeFollowed = {
+type ChangeFollowedACType = {
     type: 'CHANGE_FOLLOWED',
     userId: string
 }
 
-type setUsers = {
+type SetUsersACType = {
     type: 'SET_USERS',
     users: any
 }
 
-type setCurrentPage = {
+type SetCurrentPageACType = {
     type: 'SET_CURRENT_PAGE',
     currentPage: number
 }
 
-type setUsersTotalCount = {
+type SetUsersTotalCountACType = {
     type: 'SET_USERS_TOTAL_COUNT',
     totalCount: number
 }
 
-type toggleIsFetching = {
+type ToggleIsFetchingACType = {
     type: 'SET_IS_FETCHING'
     isFetching: false,
 }
+
+type ToggleFollowingProgressACType = {
+    type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
+    isFollowing: boolean,
+    userId: string
+}
+
+
+type ActionType =
+    | ChangeFollowedACType
+    | SetUsersACType
+    | SetCurrentPageACType
+    | SetUsersTotalCountACType
+    | ToggleIsFetchingACType
+    | ToggleFollowingProgressACType;
+
+type FollowingInProgressType = any;
+type UserType = {
+    followed: boolean,
+    id: string,
+    name: string,
+    photos: {
+        large: string | null,
+        small: string | null,
+        status: string | null,
+        uniqueUrlName: string | null
+    } | [],
+    status: string | null,
+    uniqueUrlName: string | null
+}
+export type UsersType = Array<UserType>;
+
+type StateType = {
+    followingInProgress: FollowingInProgressType,
+    users: UsersType,
+    currentPage: number,
+    totalUsersCount: number,
+    isFetching: boolean
+}
+
 
 const CHANGE_FOLLOWED = 'CHANGE_FOLLOWED';
 const SET_USERS = 'SET_USERS';
@@ -34,32 +74,32 @@ const TOGGLE_IS_FETCHING = 'SET_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 
-export const changeFollowed = (userId: string): changeFollowed => ({
+export const changeFollowed = (userId: string): ChangeFollowedACType => ({
     type: CHANGE_FOLLOWED,
     userId: userId
 })
 
-export const setUsers = (users: any): setUsers => ({
+export const setUsers = (users: any): SetUsersACType => ({
     type: SET_USERS,
     users: users
 })
 
-export const setCurrentPage = (currentPage: number): setCurrentPage => ({
+export const setCurrentPage = (currentPage: number): SetCurrentPageACType => ({
     type: SET_CURRENT_PAGE,
     currentPage: currentPage
 })
 
-export const setUsersTotalCount = (totalCount: number): setUsersTotalCount => ({
+export const setUsersTotalCount = (totalCount: number): SetUsersTotalCountACType => ({
     type: SET_USERS_TOTAL_COUNT,
     totalCount: totalCount
 })
 
-export const toggleIsFetching = (fetching: any): toggleIsFetching => ({
+export const toggleIsFetching = (fetching: any): ToggleIsFetchingACType => ({
     type: TOGGLE_IS_FETCHING,
     isFetching: fetching
 })
 
-export const toggleFollowingProgress = (isFollowing: any, userId: any) => ({
+export const toggleFollowingProgress = (isFollowing: boolean, userId: string): ToggleFollowingProgressACType => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isFollowing,
     userId
@@ -116,7 +156,7 @@ const initialState = {
     followingInProgress: []
 }
 
-const usersReducer = (state: any = initialState, action: any) => {
+const usersReducer = (state: StateType = initialState, action: ActionType): StateType => {
     switch (action.type) {
         case CHANGE_FOLLOWED:
             return {
