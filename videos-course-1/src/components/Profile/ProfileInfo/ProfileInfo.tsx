@@ -9,10 +9,8 @@ const ProfileInfo = (props: any) => {
     let arr: any = [];
     let y = Object.entries(props.profile.contacts);
     for (let i = 0; i < y.length; i++) {
-        arr.push(<p>{y[i][0]}: {y[i][1]}</p>);
-                
+        arr.push(<p>{y[i][0]}: {y[i][1]}</p>);         
     }
-    console.log(arr);
 
     return (
         <div>

@@ -8,6 +8,7 @@ import DialogsContainer from './components/Dialogs/dialogsContainer';
 import UsersContainer from './components/Users/usersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 type propsType = {
   state: stateRootType,
@@ -23,6 +24,7 @@ const App = (props: propsType) => {
           <Route exact path='/dialogs' render={() => <DialogsContainer />} />
           <Route path='/profile/:userId?' render={() => <ProfileContainer state={props.state} />} />
           <Route path='/users' render={() => <UsersContainer />} />
+          <Route path='/login' render={() => <Login />} />
         </div>
       </div>
     </BrowserRouter>
