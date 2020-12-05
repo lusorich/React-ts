@@ -19,8 +19,6 @@ const Dialogs = (props: propsType) => {
     const onChangeMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessageBody(e.currentTarget.value);
     };
-    if (!props.isAuth) return <Redirect to={"/login"}></Redirect>;
-
     return (
         <div className={s.dialogList}>
             <div>{dialogsArray}</div>
