@@ -1,8 +1,10 @@
-import {toggleFollowingProgress, setCurrentPage, userFollow, getUsers, onPageChanged, userUnfollow, UsersType } from '../../redux/users-reducer';
+import { toggleFollowingProgress, setCurrentPage, userFollow, getUsers, onPageChanged, userUnfollow, UsersType } from '../../redux/users-reducer';
 import { connect } from 'react-redux';
 import React from 'react';
 import Users from './Users';
 import Preloader from '../common/preloader/preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 interface IUsersProps {
@@ -56,11 +58,13 @@ let mapStateToProps = (state: any) => ({
 })
 
 
-export default connect(mapStateToProps, {
+
+export default compose<React.ComponentType>(connect(mapStateToProps, {
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
     onPageChanged,
     userFollow,
     userUnfollow
-})(UsersContainer);;
+}), withAuthRedirect)(UsersContainer)
+

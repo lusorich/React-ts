@@ -22,7 +22,7 @@ const App = (props: propsType) => {
         <Sidebar state={props.state.sidebar} />
         <div className='app-wrapper-content'>
           <Route exact path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/profile/:userId?' render={() => <ProfileContainer state={props.state} />} />
+          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <Login />} />
         </div>
