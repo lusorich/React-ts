@@ -1,5 +1,6 @@
 import React from 'react';
 import Preloader from '../../common/preloader/preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props: any) => {
 
@@ -14,11 +15,11 @@ const ProfileInfo = (props: any) => {
 
     return (
         <div>
-            <div>
+            {/* <div>
                 <img src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg' alt='img'></img>
-            </div>
+            </div> */}
             <div>
-                <span>{props.profile.aboutMe}</span>
+                <ProfileStatus status={props.profile.aboutMe}/>
                 {arr}
                 <img src={props.profile.photos.large} />
             </div>

@@ -1,7 +1,6 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/';
-import { stateRootType } from '../../../redux/store';
 
 type propsType = {
     newPostText: string,
@@ -12,7 +11,7 @@ type propsType = {
 
 const MyPosts = (props: propsType) => {
 
-    let postsArray = props.posts.map((post: any) => { return (<Post message={post.message} likesCount={post.likesCount} key={post.id}/>) });
+    let postsArray = props.posts.map((post: any) => { return (<Post message={post.message} likesCount={post.likesCount} key={post.id} />) });
 
     const textAreaRef = React.createRef<HTMLTextAreaElement>();
 
