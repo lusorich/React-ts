@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { resolveProjectReferencePath } from 'typescript';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -24,7 +23,19 @@ export const usersAPI = {
             .then(response => response.data)
     },
     getProfileAPI: (userId: string) => {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        return profileAPI.getProfile(userId)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: string) {
+        return instance.get(`profile/${userId}`)
             .then(response => response.data)
+    },
+    getStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`).then(response => response.data)
+    },
+    updateStatus(newStatus: string) {
+        return instance.put('profile/status', { status: newStatus })
     }
 }

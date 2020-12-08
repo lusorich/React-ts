@@ -1,24 +1,51 @@
 import { Dispatch } from "redux";
-import { usersAPI } from "../api/api";
+import { profileAPI, usersAPI } from "../api/api";
 import { actionsType, addPostActionType, changeNewTextActionType } from "./store";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_PROFILE_STATUS = 'SET-USER-STATUS';
+const UPDATE_STATUS = 'UPDATE-STATUS';
 
 export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text: string): changeNewTextActionType => ({
     type: UPDATE_NEW_POST_TEXT, newText: text
 })
+
 export const setUserProfile = (profile: any) => ({
     type: SET_USER_PROFILE,
     profile
 })
 
+export const updateProfileStatus = (newStatus: string) => ({
+    type: UPDATE_STATUS,
+    newStatus
+})
+
+export const setProfileStatus = (newStatus: string) => ({
+    type: SET_PROFILE_STATUS,
+    newStatus
+})
+
 export const getProfile = (userId: string) => (dispatch: Dispatch) => {
     usersAPI.getProfileAPI(userId)
         .then((res) => dispatch(setUserProfile(res)));
+}
+
+export const setProfileStatusTC = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then((res) => dispatch(setProfileStatus(res)))
+}
+
+export const updateStatusTC = (newStatus: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(newStatus)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(updateProfileStatus(newStatus))
+            }
+        });
 }
 
 let initialState = {
@@ -27,7 +54,8 @@ let initialState = {
         { id: 2, message: 'First', likesCount: 12 }
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 const profileReducer = (state: any = initialState, action: any) => {
@@ -51,6 +79,8 @@ const profileReducer = (state: any = initialState, action: any) => {
             };
         case SET_USER_PROFILE:
             return { ...state, profile: action.profile };
+        case SET_PROFILE_STATUS:
+            return { ...state, status: action.newStatus }
         default: return state;
     }
 }
