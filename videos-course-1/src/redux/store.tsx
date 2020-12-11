@@ -39,7 +39,8 @@ export type stateRootType = {
 }
 
 export type addPostActionType = {
-    type: 'ADD-POST'
+    type: 'ADD-POST',
+    newMessage: string
 }
 
 
@@ -54,7 +55,8 @@ export type changeNewMessageTextActionType = {
 }
 
 export type sendMessageType = {
-    type: 'SEND-MESSAGE'
+    type: 'SEND-MESSAGE',
+    newMessageBody: string
 }
 
 

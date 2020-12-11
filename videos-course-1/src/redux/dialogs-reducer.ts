@@ -1,13 +1,7 @@
-import { actionsType, stateRootType, changeNewMessageTextActionType, sendMessageType } from "./store";
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+import { actionsType, sendMessageType } from "./store";
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
-export const updateNewMessageBodyCreator = (text: string): changeNewMessageTextActionType => ({
-    type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: text
-})
-
-export const sendMessageCreator = (): sendMessageType => ({ type: SEND_MESSAGE });
+export const sendMessageCreator = (newMessageBody: string): sendMessageType => ({ type: SEND_MESSAGE, newMessageBody });
 
 let initialState = {
     messages: [
@@ -27,17 +21,14 @@ let initialState = {
 
 const dialogsReducer = (state: any = initialState, action: actionsType) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return { ...state, newMessageBody: action.newMessageBody };
         case SEND_MESSAGE:
             let newMessage = {
                 id: 5,
-                message: state.newMessageBody
+                message: action.newMessageBody
             };
             return {
                 ...state,
                 messages: [...state.messages, { ...newMessage }],
-                newMessageBody: ''
             };
         default: return state;
     }
