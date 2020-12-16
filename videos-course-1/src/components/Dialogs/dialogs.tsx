@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import s from './dialogs.module.css';
 import Message from './Message';
 import DialogItem from './dialogItem';
@@ -6,9 +6,7 @@ import { AddMessageFormRedux } from './addMessageForm';
 
 type propsType = {
     dialogsPage: any,
-    onSendMessageClick: (newMessageBody: string) => void,
-    isAuth: boolean
-
+    onSendMessageClick: (newMessageBody: string) => void
 }
 
 const Dialogs = (props: propsType) => {
