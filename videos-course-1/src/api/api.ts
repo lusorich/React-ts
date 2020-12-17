@@ -39,3 +39,16 @@ export const profileAPI = {
         return instance.put('profile/status', { status: newStatus })
     }
 }
+
+export const loginAPI = {
+    login(email: string, password: string, remeberMe: boolean = false) {
+        return instance.post('auth/login', {
+            email,
+            password,
+            remeberMe
+        });
+    },
+    logout() {
+        return instance.delete('auth/login');
+    }
+}
