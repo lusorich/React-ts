@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { loginAPI, usersAPI } from "../api/api";
+import { stopSubmit } from 'redux-form';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -19,7 +20,7 @@ export const getAuthUser = () => (dispatch: Dispatch) => {
 }
 
 export const login = (email: string, password: string, remeberMe: boolean) => (dispatch: Dispatch) => {
-    return loginAPI.login(email, password, remeberMe)
+    loginAPI.login(email, password, remeberMe)
         .then(response => {
             //@ts-ignore
             if (response.data.resultCode === 0) {
@@ -27,7 +28,8 @@ export const login = (email: string, password: string, remeberMe: boolean) => (d
                 dispatch(getAuthUser());
                 console.log('YES');
             } else {
-                console.log('Error');
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
+                dispatch(stopSubmit('login', { _error: message }));
             }
         })
 }
