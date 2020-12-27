@@ -34,4 +34,4 @@ const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth
 })
 
-export default compose<React.ComponentType>(connect(mapStateToProps, { getProfile, setProfileStatusTC, updateStatusTC }), withRouter, withAuthRedirect)(ProfileContainer);
+export default compose<React.ComponentType>(connect(mapStateToProps, { getProfile, setProfileStatusTC, updateStatusTC }), withRouter)(ProfileContainer);
