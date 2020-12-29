@@ -31,7 +31,6 @@ const Users = (props: PropsType) => {
         width: '100px',
         height: '100px'
     }
-    console.log(props.users);
 
     return <div>
         <div>
